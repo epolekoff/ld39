@@ -159,7 +159,7 @@ public class PlayerMovement : MonoBehaviour {
             velocity += new Vector2(horizontalMovement * moveSpeed, 0);
             // Limit the velocity in range.
             velocity.x = Mathf.Clamp(velocity.x, -moveSpeed, moveSpeed);
-
+            
             //Activate run animation
             m_animator.SetBool("isRunning", true);
         }
