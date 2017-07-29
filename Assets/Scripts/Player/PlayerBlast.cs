@@ -9,6 +9,7 @@ public class PlayerBlast : MonoBehaviour {
     /// Arm
     /// </summary>
     public GameObject ArmObject;
+    public GameObject ArmSprite;
     public GameObject Reticle;
     public GameObject ReticleCover;
 
@@ -104,7 +105,8 @@ public class PlayerBlast : MonoBehaviour {
     private void UpdateReticle()
     {
         // Make The reticle visible if there is a charge.
-        Reticle.SetActive(m_charge > 0);
+        Reticle.SetActive(Input.GetAxis("AimHorizontal") != 0 || Input.GetAxis("AimVertical") != 0);
+        ArmSprite.SetActive(m_charge > 0);
 
         // Scale the reticle color overlay so it looks like a charge meter thing.
         Vector3 originalScale = ReticleCover.transform.localScale;
