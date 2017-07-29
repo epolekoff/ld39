@@ -13,6 +13,11 @@ public class Designer : Singleton<Designer> {
     public float MinJumpHeight = 0.1f;
     public float TimeToMaxHeight = 0.5f;
 
+    [Header("Arm Powers")]
+    [Space(10)]
+    public float ChargeRate;
+    public float MaxCharge;
+    public float ForceChargeMultiplier;
 
     [Header("Unused - Wall Jump")]
     [Space(10)]
