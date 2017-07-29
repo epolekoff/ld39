@@ -24,12 +24,9 @@ public class PlayerMovement : MonoBehaviour {
     private float m_clingTimer = 0;
     private float m_wallJumpMovementLockoutTimer = 0f;
     private float m_racerHeight = 1f;
-    private bool m_hasMovementSpeedBoost = false;
     private float m_movementMultiplier = 1f;
 
-    private bool m_rewinding = false;
     private const float FrameRecordingDelay = 0.1f;
-    private float m_recordingTimer = 0;
 
     public bool MovementOverride = false;
     public bool GravityOverride = false;
@@ -109,18 +106,16 @@ public class PlayerMovement : MonoBehaviour {
         // Get input
         float horizontalMovement = Input.GetAxis("Horizontal");
         float moveSpeed = OnGround ? Designer.Instance.MovementSpeed : Designer.Instance.AirMovementSpeed;
-        // Account for the speed boost powerup 
-        if (m_hasMovementSpeedBoost) {
-            moveSpeed *= m_movementMultiplier;
-        }
+        float maxMoveSpeed = OnGround ? Designer.Instance.MovementSpeed : Designer.Instance.MaxManualAirMovementSpeed;
 
-        if ((velocity.x < moveSpeed && horizontalMovement > 0) || 
-            (velocity.x > -moveSpeed && horizontalMovement < 0))
+        if ((velocity.x < maxMoveSpeed && horizontalMovement > 0) || 
+            (velocity.x > -maxMoveSpeed && horizontalMovement < 0))
         {
             // Move by input * speed.
             velocity += new Vector2(horizontalMovement * moveSpeed, 0);
+
             // Limit the velocity in range.
-            velocity.x = Mathf.Clamp(velocity.x, -moveSpeed, moveSpeed);
+            velocity.x = Mathf.Clamp(velocity.x, -Designer.Instance.MaxMovementSpeedEvenWithCharge, Designer.Instance.MaxMovementSpeedEvenWithCharge);
             
             //Activate run animation
             m_animator.SetBool("isRunning", true);

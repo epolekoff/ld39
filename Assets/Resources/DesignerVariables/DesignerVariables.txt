@@ -6,12 +6,16 @@
 "MaxJumpHeight":3.0,
 "MinJumpHeight":0.1,
 "TimeToMaxHeight":0.5,
+"MaxMovementSpeedEvenWithCharge":100000.0,
+"MaxManualAirMovementSpeed":10.0,
+
 "ChargeRate":1.0,
 "MinCharge":1.0,
 "MaxCharge":2.0,
 "ForceChargeMultiplier":700,
 "BatteryRechargeAmount":0.3,
 "ChargePowerUsageRatio":0.1,
+
 "MaxWallJumpHeight":0.0,
 "WallSlideMultiplier":1.0,
 "WallJumpKickoffVelocity":0.0,
