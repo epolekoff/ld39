@@ -37,7 +37,6 @@ public class GameController : Singleton<GameController>, IStateMachineEntity {
         if(CurrentPowerLevel < 0)
         {
             CurrentPowerLevel = 0;
-            Debug.Log("Overcharge");
         }
     }
 

@@ -58,7 +58,7 @@ public class PlayerBlast : MonoBehaviour {
         // Hold down the button to charge.
         if(Input.GetAxis("Fire") > 0 || Input.GetButton("FireButton"))
         {
-            m_triggerDown = true;
+            m_triggerDown = Input.GetAxis("Fire") > 0;
             if(m_charge == 0)
             {
                 m_charge = Designer.Instance.MinCharge;
@@ -83,7 +83,7 @@ public class PlayerBlast : MonoBehaviour {
         if ((Input.GetAxis("Fire") == 0 && m_triggerDown) || 
             Input.GetButtonUp("FireButton"))
         {
-            m_triggerDown = false;
+            m_triggerDown = Input.GetAxis("Fire") == 0;
 
             // Add the force
             Vector2 armDirection = new Vector2(m_aimX, -m_aimY);

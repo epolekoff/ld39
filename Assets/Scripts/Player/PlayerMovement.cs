@@ -83,27 +83,6 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     /// <summary>
-    /// Execute a jump action using internal variables.
-    /// This may be called externally from the RacerAbilities class.
-    /// </summary>
-    public void ExecuteWallJump()
-    {
-        // Raycast in both directions to determine where the wall is.
-        float castLength = GetComponent<BoxCollider2D>().size.x;
-        float velocitySign = 0;
-        if (Physics2D.Raycast(transform.position, Vector2.right, castLength, GroundLayer.value))
-        {
-            velocitySign = -1;
-        }
-        else if (Physics2D.Raycast(transform.position, Vector2.left, castLength, GroundLayer.value))
-        {
-            velocitySign = 1;
-        }
-        m_rigidbody.velocity = new Vector2(Designer.Instance.WallJumpKickoffVelocity * velocitySign, m_maxJumpVelocity);
-        m_wallJumpMovementLockoutTimer = Designer.Instance.WallJumpMovementLockoutTimeSeconds;
-    }
-
-    /// <summary>
     /// Enhances the racer's walk speed by the given value;
     /// </summary>
     /// <param name="multiplier">Boost value.</param>
@@ -273,7 +252,7 @@ public class PlayerMovement : MonoBehaviour {
             }
             else if(m_wallSliding)
             {
-                ExecuteWallJump();
+                //ExecuteWallJump();
             }
         }
         else if(Input.GetButtonUp("Jump"))

@@ -19,5 +19,11 @@ public class MainGameState : AbsState {
 
         // Update the power level
         UIController.Instance.GameCanvas.SetPowerMeterLevel(GameController.Instance.CurrentPowerLevel);
+
+        // Cheats
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            GameController.Instance.AddCharge(1);
+        }
     }
 }
