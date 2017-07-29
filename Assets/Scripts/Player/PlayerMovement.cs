@@ -76,27 +76,10 @@ public class PlayerMovement : MonoBehaviour {
     /// </summary>
     public void ExecuteJump()
     {
-        m_rigidbody.velocity = new Vector2(m_rigidbody.velocity.x, m_maxJumpVelocity);
+        m_rigidbody.velocity += new Vector2(0, m_maxJumpVelocity);
 
         //Activate jumping in Animator
         m_animator.SetBool("isJumping", true);
-    }
-
-    /// <summary>
-    /// Enhances the racer's walk speed by the given value;
-    /// </summary>
-    /// <param name="multiplier">Boost value.</param>
-    public void EnableMovementBoost(float multiplier) {
-        m_hasMovementSpeedBoost = true;
-        m_movementMultiplier = multiplier;
-    }
-
-    /// <summary>
-    /// Turns off the racer's speed boost.
-    /// </summary>
-    public void DisableMovementBoost() {
-        m_hasMovementSpeedBoost = false;
-        m_movementMultiplier = 1f;
     }
 
     /// <summary>
@@ -255,13 +238,13 @@ public class PlayerMovement : MonoBehaviour {
                 //ExecuteWallJump();
             }
         }
-        else if(Input.GetButtonUp("Jump"))
-        {
-            if(m_rigidbody.velocity.y > m_minJumpVelocity)
-            {
-                m_rigidbody.velocity = new Vector2(m_rigidbody.velocity.x, m_minJumpVelocity);
-            }
-        }
+        //else if(Input.GetButtonUp("Jump"))
+        //{
+        //    if(m_rigidbody.velocity.y > m_minJumpVelocity)
+        //    {
+        //        m_rigidbody.velocity = new Vector2(m_rigidbody.velocity.x, m_minJumpVelocity);
+        //    }
+        //}
 
         //Apply Gravity.
         if(!GravityOverride)
