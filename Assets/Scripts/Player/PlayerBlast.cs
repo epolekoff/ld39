@@ -9,6 +9,7 @@ public class PlayerBlast : MonoBehaviour {
     /// Arm
     /// </summary>
     public GameObject ArmObject;
+    public GameObject Reticle;
 
     private const float ChargeRate = 1f;
     private const float MaxCharge = 3f;
@@ -29,6 +30,8 @@ public class PlayerBlast : MonoBehaviour {
         HandleAiming();
 
         HandleShooting();
+
+        UpdateReticle();
 	}
 
     /// <summary>
@@ -50,6 +53,9 @@ public class PlayerBlast : MonoBehaviour {
         ArmObject.transform.localRotation = Quaternion.LookRotation(new Vector3(m_aimX, -m_aimY, 0), transform.right);
     }
 
+    /// <summary>
+    /// Shoot a blast to go forward.
+    /// </summary>
     private void HandleShooting()
     {
         // Hold down the button to charge.
@@ -73,6 +79,17 @@ public class PlayerBlast : MonoBehaviour {
             Vector2 armDirection = new Vector2(m_aimX, -m_aimY);
             Vector2 force = -armDirection * m_charge * ForceChargeMultiplier;
             GetComponent<Rigidbody2D>().AddForce(force);
+
+            // Reset the charge
+            m_charge = 0;
         }
+    }
+
+    /// <summary>
+    /// Update the display of the reticle.
+    /// </summary>
+    private void UpdateReticle()
+    {
+        Reticle.SetActive(m_charge > 0);
     }
 }
