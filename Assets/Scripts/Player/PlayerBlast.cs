@@ -75,7 +75,7 @@ public class PlayerBlast : MonoBehaviour {
             // Cannot exceed the amount of charge we have left.
             if (m_charge * Designer.Instance.ChargePowerUsageRatio > GameController.Instance.CurrentPowerLevel)
             {
-                m_charge = GameController.Instance.CurrentPowerLevel / Designer.Instance.ChargePowerUsageRatio;
+                m_charge = Mathf.Max(GameController.Instance.CurrentPowerLevel / Designer.Instance.ChargePowerUsageRatio, Designer.Instance.MinCharge);
             }
         }
 
