@@ -10,10 +10,7 @@ public class PlayerBlast : MonoBehaviour {
     /// </summary>
     public GameObject ArmObject;
     public GameObject Reticle;
-
-    private const float ChargeRate = 1f;
-    private const float MaxCharge = 3f;
-    private const float ForceChargeMultiplier = 100f;
+    public GameObject ReticleCover;
 
     private float m_charge = 0f;
     private bool m_triggerDown = false;
@@ -62,10 +59,10 @@ public class PlayerBlast : MonoBehaviour {
         if(Input.GetAxis("Fire") > 0 || Input.GetButton("FireButton"))
         {
             m_triggerDown = true;
-            m_charge += ChargeRate * Time.deltaTime;
-            if(m_charge > MaxCharge)
+            m_charge += Designer.Instance.ChargeRate * Time.deltaTime;
+            if(m_charge > Designer.Instance.MaxCharge)
             {
-                m_charge = MaxCharge;
+                m_charge = Designer.Instance.MaxCharge;
             }
         }
 
@@ -77,7 +74,7 @@ public class PlayerBlast : MonoBehaviour {
 
             // Add the force
             Vector2 armDirection = new Vector2(m_aimX, -m_aimY);
-            Vector2 force = -armDirection * m_charge * ForceChargeMultiplier;
+            Vector2 force = -armDirection * m_charge * Designer.Instance.ForceChargeMultiplier;
             GetComponent<Rigidbody2D>().AddForce(force);
 
             // Reset the charge
@@ -90,6 +87,12 @@ public class PlayerBlast : MonoBehaviour {
     /// </summary>
     private void UpdateReticle()
     {
+        // Make The reticle visible if there is a charge.
         Reticle.SetActive(m_charge > 0);
+
+        // Scale the reticle color overlay so it looks like a charge meter thing.
+        Vector3 originalScale = ReticleCover.transform.localScale;
+        ReticleCover.transform.localScale = new Vector3((m_charge / Designer.Instance.MaxCharge)/2, originalScale.y, originalScale.z);
+
     }
 }
