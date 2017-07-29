@@ -12,8 +12,8 @@
 "ChargeRate":1.0,
 "MinCharge":1.0,
 "MaxCharge":2.0,
-"ForceChargeMultiplier":700,
-"BatteryRechargeAmount":0.3,
+"ForceChargeMultiplier":350,
+"BatteryRechargeAmount":0.1,
 "ChargePowerUsageRatio":0.1,
 
 "MaxWallJumpHeight":0.0,
