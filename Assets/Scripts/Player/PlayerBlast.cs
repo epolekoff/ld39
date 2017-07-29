@@ -59,6 +59,11 @@ public class PlayerBlast : MonoBehaviour {
         if(Input.GetAxis("Fire") > 0 || Input.GetButton("FireButton"))
         {
             m_triggerDown = true;
+            if(m_charge == 0)
+            {
+                m_charge = Designer.Instance.MinCharge;
+            }
+
             m_charge += Designer.Instance.ChargeRate * Time.deltaTime;
             if(m_charge > Designer.Instance.MaxCharge)
             {

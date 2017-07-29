@@ -16,6 +16,7 @@ public class Designer : Singleton<Designer> {
     [Header("Arm Powers")]
     [Space(10)]
     public float ChargeRate;
+    public float MinCharge;
     public float MaxCharge;
     public float ForceChargeMultiplier;
 
