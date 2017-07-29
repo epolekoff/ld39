@@ -19,6 +19,15 @@ public class Designer : Singleton<Designer> {
     public float MaxCharge;
     public float ForceChargeMultiplier;
 
+    [Header("Items")]
+    [Space(10)]
+    public float BatteryRechargeAmount = 0.3f;
+
+    /// <summary>
+    /// If you hold Charge for 1 second, how much power is used, in % from [0,1].
+    /// </summary>
+    public float ChargePowerUsageRatio = .1f;
+
     [Header("Unused - Wall Jump")]
     [Space(10)]
     [Range(0, 1)]

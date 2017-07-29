@@ -60,9 +60,17 @@ public class PlayerBlast : MonoBehaviour {
         {
             m_triggerDown = true;
             m_charge += Designer.Instance.ChargeRate * Time.deltaTime;
+
+            // Cannot exceed the max value.
             if(m_charge > Designer.Instance.MaxCharge)
             {
                 m_charge = Designer.Instance.MaxCharge;
+            }
+
+            // Cannot exceed the amount of charge we have left.
+            if (m_charge * Designer.Instance.ChargePowerUsageRatio > GameController.Instance.CurrentPowerLevel)
+            {
+                m_charge = GameController.Instance.CurrentPowerLevel / Designer.Instance.ChargePowerUsageRatio;
             }
         }
 
@@ -76,6 +84,9 @@ public class PlayerBlast : MonoBehaviour {
             Vector2 armDirection = new Vector2(m_aimX, -m_aimY);
             Vector2 force = -armDirection * m_charge * Designer.Instance.ForceChargeMultiplier;
             GetComponent<Rigidbody2D>().AddForce(force);
+
+            // Remove the used charge from our meter.
+            GameController.Instance.UseCharge(m_charge * Designer.Instance.ChargePowerUsageRatio);
 
             // Reset the charge
             m_charge = 0;

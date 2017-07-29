@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: e96c74570f3c8394084e88fd8613fadd
+timeCreated: 1501313765
+licenseType: Pro
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Technique BRK
+  fontNames:
+  - Technique BRK
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
