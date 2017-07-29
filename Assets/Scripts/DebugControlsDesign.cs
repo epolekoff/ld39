@@ -21,5 +21,11 @@ public class DebugControlsDesign : MonoBehaviour {
             if (playerObject != null)
                 playerObject.transform.position = resetPos;
         }
+
+        if(Input.GetKeyDown(KeyCode.T))
+        {
+            if (playerObject != null)
+                resetPos = playerObject.transform.position;
+        }
 	}
 }
