@@ -15,6 +15,7 @@ public class LevelIntroState : AbsState {
 
         // Disable the blast ability
         GameController.Instance.Player.GetComponent<PlayerBlast>().MoveAllowed = false;
+        GameController.Instance.GameStarted = false;
 
         UIController.Instance.GameCanvas.GameUI.SetActive(false);
     }
@@ -37,7 +38,7 @@ public class LevelIntroState : AbsState {
         GameController.Instance.Player.GetComponent<PlayerMovement>().MovementOverride = false;
         GameController.Instance.Player.GetComponent<PlayerBlast>().MoveAllowed = true;
 
-        GameController.Instance.GameStarted = false;
+        GameController.Instance.GameStarted = true;
         UIController.Instance.GameCanvas.GameUI.SetActive(true);
     }
 

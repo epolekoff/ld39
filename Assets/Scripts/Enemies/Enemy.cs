@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour {
     public float moveRangeIncrease = 1;
 
     public float energyDropPercent = 100;
+    private float energyDropAmount = 0.3f;
 
     private Vector3 startingPos;
 
@@ -38,11 +39,13 @@ public class Enemy : MonoBehaviour {
         {
             DropEnergy();
         }
+
+        Destroy(this.gameObject);
     }
 
     void DropEnergy()
     {
-
+        GameController.Instance.AddCharge(energyDropAmount);
     }
 
     void HandleMovement ()
@@ -74,6 +77,14 @@ public class Enemy : MonoBehaviour {
             case (MoveType.WALKING):
 
                 break;
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (1 << other.gameObject.layer == 11) // Attack Layer
+        {
+            Death();
         }
     }
 }

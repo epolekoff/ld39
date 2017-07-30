@@ -20,11 +20,11 @@ public class PlayerBlast : MonoBehaviour
 
     public bool MoveAllowed { get; set; }
 
-    private const float MinTimescale = 0.1f;
-    private const float TimescaleDecayRate = 0.4f;
+    private const float MinTimescale = 0.05f;
+    private const float TimescaleDecayRate = 1f;
     private const float MaxSlowdownTime = 4f;
 
-    private const float CameraLerpTime = 5f;
+    private const float CameraLerpTime = 2f;
     private const float CameraResetTime = 0.5f;
     private float DefaultCameraSize;
     private Vector3 DefaultCameraPosition;
@@ -220,7 +220,11 @@ public class PlayerBlast : MonoBehaviour
         forceCone.transform.localRotation = Quaternion.LookRotation(new Vector3(m_aimX, -m_aimY, 0), transform.right);
         forceCone.EmitParticles();
 
+        // Deparent the attack hitbox.
+        forceCone.Hitbox.transform.SetParent(null);
+
         // Destroy the cone when it's done.
         GameObject.Destroy(forceConeObject, 3f);
+        GameObject.Destroy(forceCone.Hitbox, 0.5f);
     }
 }

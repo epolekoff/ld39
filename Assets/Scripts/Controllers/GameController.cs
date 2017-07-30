@@ -15,7 +15,7 @@ public class GameController : Singleton<GameController>, IStateMachineEntity {
     public Transform PlayerSpawnPoint;
 
     public int CurrentLevel;
-    private const int NumLevels = 3;
+    private const int NumLevels = 4;
 
     public float CurrentGameTime { get; set; }
     public float CurrentPowerLevel { get; set; }
