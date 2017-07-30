@@ -31,6 +31,9 @@ public class PlayerBlast : MonoBehaviour
     private const float ZoomedCameraSize = 3.26f;
     private readonly Vector3 ZoomedCameraPosition = new Vector3(0, 0, -10);
 
+    private const float ConeHitDistance = 10f;
+    private readonly Vector2 ConeHitSize = new Vector2(3, 3);
+
     private float m_charge = 0f;
     private bool m_triggerDown = false;
     private bool m_charging = false;
@@ -217,14 +220,18 @@ public class PlayerBlast : MonoBehaviour
 
         forceCone.transform.SetParent(this.transform);
         forceCone.transform.localPosition = ArmObject.transform.localPosition;
-        forceCone.transform.localRotation = Quaternion.LookRotation(new Vector3(m_aimX, -m_aimY, 0), transform.right);
+        Vector3 forward = new Vector3(m_aimX, -m_aimY, 0);
+        forceCone.transform.localRotation = Quaternion.LookRotation(forward, transform.right);
         forceCone.EmitParticles();
 
-        // Deparent the attack hitbox.
-        forceCone.Hitbox.transform.SetParent(null);
+        // Do a raycast from the player to check if there are any enemies.
+        RaycastHit2D hit = Physics2D.BoxCast(transform.position, ConeHitSize, 0, new Vector2(forward.x, forward.y), ConeHitDistance, 1 << 12);
+        if(hit)
+        {
+            hit.transform.gameObject.GetComponent<Enemy>().Death();
+        }
 
         // Destroy the cone when it's done.
         GameObject.Destroy(forceConeObject, 3f);
-        GameObject.Destroy(forceCone.Hitbox, 0.5f);
     }
 }

@@ -5,7 +5,6 @@ using UnityEngine;
 public class ForceCone : MonoBehaviour {
 
     public ParticleSystem Particles;
-    public GameObject Hitbox;
 
     private const int ParticleEmissionAmount = 50;
 

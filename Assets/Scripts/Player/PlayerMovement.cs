@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour {
 
     public LayerMask GroundLayer;
     public LayerMask DeathLayer;
+    public LayerMask EnemyLayer;
     public LayerMask FinishLineLayer;
     public Transform GroundDetectionObject;
 
@@ -203,7 +204,7 @@ public class PlayerMovement : MonoBehaviour {
     /// <param name="coll"></param>
     void OnCollisionEnter2D(Collision2D coll)
     {
-        if(1 << coll.gameObject.layer == DeathLayer.value)
+        if(1 << coll.gameObject.layer == DeathLayer.value || 1 << coll.gameObject.layer == EnemyLayer.value)
         {
             KillPlayer();
         }
@@ -215,7 +216,7 @@ public class PlayerMovement : MonoBehaviour {
     /// <param name="other"></param>
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (1 << other.gameObject.layer == DeathLayer.value)
+        if (1 << other.gameObject.layer == DeathLayer.value || 1 << other.gameObject.layer == EnemyLayer.value)
         {
             KillPlayer();
         }
