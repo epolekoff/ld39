@@ -10,6 +10,8 @@ public class LevelIntroState : AbsState {
 
     public override void Enter(IStateMachineEntity entity)
     {
+        Time.timeScale = 1;
+
         //Disable the player movement when the intro is playing.
         GameController.Instance.Player.GetComponent<PlayerMovement>().MovementOverride = true;
 
