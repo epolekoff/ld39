@@ -38,7 +38,7 @@ public class PlayerBlast : MonoBehaviour
     private bool m_triggerDown = false;
     private bool m_charging = false;
     private float m_cooldownTimer = 0f;
-    private const float MaxCooldownTimer = 0.3f;
+    private const float MaxCooldownTimer = 0.25f;
 
     float m_aimX = 0, m_aimY = 0;
 

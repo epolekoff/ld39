@@ -115,7 +115,7 @@ public class GameController : Singleton<GameController>, IStateMachineEntity {
 
     public void GoToNextLevel()
     {
-        if(IsNextLevel())
+        if(!IsNextLevel())
         {
             SceneManager.LoadScene(0);
         }
