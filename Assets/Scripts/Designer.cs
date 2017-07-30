@@ -24,6 +24,7 @@ public class Designer : Singleton<Designer> {
     public float TimeToMaxHeight { get { return m_vars.TimeToMaxHeight; } }
     public float MaxMovementSpeedEvenWithCharge { get { return m_vars.MaxMovementSpeedEvenWithCharge; } }
     public float MaxManualAirMovementSpeed { get { return m_vars.MaxManualAirMovementSpeed; } }
+    public float MaxManualGroundMovementSpeed { get { return m_vars.MaxManualGroundMovementSpeed; } }
 
     public float ChargeRate { get { return m_vars.ChargeRate; } }
     public float MinCharge { get { return m_vars.MinCharge; } }
@@ -75,6 +76,8 @@ public class SerializableDesignerVariables
     public float MaxMovementSpeedEvenWithCharge;
     [SerializeField]
     public float MaxManualAirMovementSpeed;
+    [SerializeField]
+    public float MaxManualGroundMovementSpeed;
 
     [SerializeField]
     public float ChargeRate;

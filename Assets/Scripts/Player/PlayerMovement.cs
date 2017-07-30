@@ -106,13 +106,14 @@ public class PlayerMovement : MonoBehaviour {
         // Get input
         float horizontalMovement = Input.GetAxis("Horizontal");
         float moveSpeed = OnGround ? Designer.Instance.MovementSpeed : Designer.Instance.AirMovementSpeed;
-        float maxMoveSpeed = OnGround ? Designer.Instance.MovementSpeed : Designer.Instance.MaxManualAirMovementSpeed;
+        float maxMoveSpeed = OnGround ? Designer.Instance.MaxManualGroundMovementSpeed : Designer.Instance.MaxManualAirMovementSpeed;
 
         if ((velocity.x < maxMoveSpeed && horizontalMovement > 0) || 
             (velocity.x > -maxMoveSpeed && horizontalMovement < 0))
         {
             // Move by input * speed.
             velocity += new Vector2(horizontalMovement * moveSpeed, 0);
+            Debug.Log(horizontalMovement * moveSpeed * Time.deltaTime);
 
             // Limit the velocity in range.
             velocity.x = Mathf.Clamp(velocity.x, -Designer.Instance.MaxMovementSpeedEvenWithCharge, Designer.Instance.MaxMovementSpeedEvenWithCharge);
