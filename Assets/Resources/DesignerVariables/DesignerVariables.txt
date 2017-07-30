@@ -1,6 +1,6 @@
 {
-"MovementSpeed":10.0,
-"AirMovementSpeed":1.0,
+"MovementSpeed":10,
+"AirMovementSpeed":1,
 "MovementSpeedGroundFriction":1.0,
 "MovementSpeedAirFriction":0.0,
 "MaxJumpHeight":3.0,
@@ -8,6 +8,7 @@
 "TimeToMaxHeight":0.5,
 "MaxMovementSpeedEvenWithCharge":100000.0,
 "MaxManualAirMovementSpeed":10.0,
+"MaxManualGroundMovementSpeed":10.0,
 
 "ChargeRate":2.0,
 "MinCharge":1.0,
