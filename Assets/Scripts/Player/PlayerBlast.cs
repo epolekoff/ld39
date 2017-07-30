@@ -240,6 +240,7 @@ public class PlayerBlast : MonoBehaviour
         if(hit)
         {
             hit.transform.gameObject.GetComponent<Enemy>().Death();
+            hit.transform.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(forward.x, forward.y) * 1000f);
         }
 
         // Destroy the cone when it's done.

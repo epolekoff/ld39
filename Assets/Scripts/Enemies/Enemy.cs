@@ -8,6 +8,8 @@ public class Enemy : MonoBehaviour {
     public float moveSpeed;
     public float moveRangeIncrease = 1;
 
+    private bool dead = false;
+
     public float energyDropPercent = 100;
     private float energyDropAmount = 0.3f;
 
@@ -26,8 +28,8 @@ public class Enemy : MonoBehaviour {
 
     void FixedUpdate ()
     {
-
-        HandleMovement();
+        if(!dead)
+            HandleMovement();
 
     }
 
@@ -40,7 +42,12 @@ public class Enemy : MonoBehaviour {
             DropEnergy();
         }
 
-        Destroy(this.gameObject);
+        var rigidbody = this.gameObject.AddComponent<Rigidbody2D>();
+        GetComponent<Collider2D>().enabled = false;
+
+        dead = true;
+
+        Destroy(this.gameObject, 3f);
     }
 
     void DropEnergy()
