@@ -9,7 +9,7 @@
 "MaxMovementSpeedEvenWithCharge":100000.0,
 "MaxManualAirMovementSpeed":10.0,
 
-"ChargeRate":1.0,
+"ChargeRate":2.0,
 "MinCharge":1.0,
 "MaxCharge":2.0,
 "ForceChargeMultiplier":350,

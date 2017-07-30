@@ -20,9 +20,15 @@ public class Enemy : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        HandleMovement();
 
 	}
+
+    void FixedUpdate ()
+    {
+
+        HandleMovement();
+
+    }
 
     public void Death()
     {
@@ -58,7 +64,10 @@ public class Enemy : MonoBehaviour {
 
             case (MoveType.HORIZONTAL):
 
-                transform.position = new Vector3(Mathf.Sin(Time.time) * moveSpeed + startingPos.x, transform.position.y, transform.position.z);
+                float newXPos = (Mathf.Sin(Time.time * moveSpeed) * moveRangeIncrease) + startingPos.x;
+                //newYPos *= moveRangeIncrease;
+
+                transform.position = new Vector3(newXPos, transform.position.y, transform.position.z);
 
                 break;
 
