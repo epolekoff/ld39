@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Player))]
 public class PlayerBlast : MonoBehaviour
@@ -12,7 +13,8 @@ public class PlayerBlast : MonoBehaviour
     public GameObject ArmObject;
     public GameObject ArmSprite;
     public GameObject Reticle;
-    public GameObject ReticleCover;
+    public Image ReticleCover;
+    public Gradient ReticleFillGradient;
 
     private const float MinTimescale = 0.1f;
     private const float TimescaleDecayRate = 0.5f;
@@ -143,8 +145,9 @@ public class PlayerBlast : MonoBehaviour
         ArmSprite.SetActive(m_charge > 0);
 
         // Scale the reticle color overlay so it looks like a charge meter thing.
-        Vector3 originalScale = ReticleCover.transform.localScale;
-        ReticleCover.transform.localScale = new Vector3((m_charge / Designer.Instance.MaxCharge) / 2, originalScale.y, originalScale.z);
+        float ratio = (m_charge - Designer.Instance.MinCharge) / (Designer.Instance.MaxCharge - Designer.Instance.MinCharge);
+        ReticleCover.fillAmount = ratio;
+        ReticleCover.color = ReticleFillGradient.Evaluate(ratio);
     }
 
     /// <summary>
