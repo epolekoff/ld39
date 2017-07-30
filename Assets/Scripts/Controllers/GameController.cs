@@ -11,6 +11,8 @@ public class GameController : Singleton<GameController>, IStateMachineEntity {
         return m_stateMachine;
     }
 
+    public Transform PlayerSpawnPoint;
+
     public float CurrentGameTime { get; set; }
     public float CurrentPowerLevel { get; set; }
 
@@ -20,6 +22,9 @@ public class GameController : Singleton<GameController>, IStateMachineEntity {
 
         // Initialize variables
         CurrentPowerLevel = 1f;
+
+        // Create the player
+        PlayerFactory.CreatePlayer();
     }
 	
 	// Update is called once per frame
