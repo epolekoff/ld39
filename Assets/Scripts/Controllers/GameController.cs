@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : Singleton<GameController>, IStateMachineEntity {
 
@@ -13,22 +14,30 @@ public class GameController : Singleton<GameController>, IStateMachineEntity {
 
     public Transform PlayerSpawnPoint;
 
+    public int CurrentLevel;
+    private const int NumLevels = 3;
+
     public float CurrentGameTime { get; set; }
     public float CurrentPowerLevel { get; set; }
 
-    // Use this for initialization
-    void Start () {
-        m_stateMachine = new FiniteStateMachine(new LevelIntroState(), this);
+    public bool GameStarted = false;
 
+    public Player Player { get; set; }
+
+    // Use this for initialization
+    void Awake () {
         // Initialize variables
         CurrentPowerLevel = 1f;
 
         // Create the player
-        PlayerFactory.CreatePlayer();
+        Player = PlayerFactory.CreatePlayer();
+
+        m_stateMachine = new FiniteStateMachine(new LevelIntroState(), this);
+
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
         m_stateMachine.Update();
 
     }
@@ -63,5 +72,24 @@ public class GameController : Singleton<GameController>, IStateMachineEntity {
             }
         }
         return true;
+    }
+
+    public void Victory()
+    {
+        m_stateMachine.ChangeState(new LevelVictoryState());
+    }
+
+    public void GoToNextLevel()
+    {
+        if(IsNextLevel())
+        {
+            SceneManager.LoadScene(0);
+        }
+        SceneManager.LoadScene(CurrentLevel + 1);
+    }
+
+    public bool IsNextLevel()
+    {
+        return CurrentLevel != NumLevels;
     }
 }

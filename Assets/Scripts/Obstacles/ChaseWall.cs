@@ -15,8 +15,11 @@ public class ChaseWall : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        translationVector = Vector2.right * wallSpeed;
+        if(GameController.Instance.GameStarted)
+        {
+            translationVector = Vector2.right * wallSpeed;
 
-        transform.Translate(translationVector * Time.deltaTime);
+            transform.Translate(translationVector * Time.deltaTime);
+        }
     }
 }

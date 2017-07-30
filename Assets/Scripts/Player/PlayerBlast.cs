@@ -18,6 +18,8 @@ public class PlayerBlast : MonoBehaviour
 
     public GameObject ForceConePrefab;
 
+    public bool MoveAllowed { get; set; }
+
     private const float MinTimescale = 0.1f;
     private const float TimescaleDecayRate = 0.4f;
     private const float MaxSlowdownTime = 4f;
@@ -47,7 +49,10 @@ public class PlayerBlast : MonoBehaviour
     {
         HandleAiming();
 
-        HandleShooting();
+        if (MoveAllowed)
+        {
+            HandleShooting();
+        }
 
         UpdateReticle();
     }
