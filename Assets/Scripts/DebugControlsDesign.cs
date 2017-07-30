@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class DebugControlsDesign : MonoBehaviour {
 
-    public Player playerObject;
+    public Transform playerSpawnPoint;
 
     public Vector3 resetPos;
 
+    private Player playerObj;
 
 	// Use this for initialization
 	void Start () {
@@ -16,16 +17,22 @@ public class DebugControlsDesign : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+/*           
+
         if(Input.GetKeyDown(KeyCode.R))
         {
-            if (playerObject != null)
-                playerObject.transform.position = resetPos;
+            if (playerSpawnPoint != null)
+                playerObj.transform.position = resetPos;
         }
 
         if(Input.GetKeyDown(KeyCode.T))
         {
-            if (playerObject != null)
-                resetPos = playerObject.transform.position;
+            if (playerSpawnPoint != null)
+                resetPos = playerObj.transform.position;
         }
+
+
+    */
 	}
 }
