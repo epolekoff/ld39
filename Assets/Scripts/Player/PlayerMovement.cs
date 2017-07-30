@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour {
 
     public LayerMask GroundLayer;
     public LayerMask DeathLayer;
+    public LayerMask FinishLineLayer;
     public Transform GroundDetectionObject;
 
     private Player m_player;
@@ -113,7 +114,6 @@ public class PlayerMovement : MonoBehaviour {
         {
             // Move by input * speed.
             velocity += new Vector2(horizontalMovement * moveSpeed, 0);
-            Debug.Log(horizontalMovement * moveSpeed * Time.deltaTime);
 
             // Limit the velocity in range.
             velocity.x = Mathf.Clamp(velocity.x, -Designer.Instance.MaxMovementSpeedEvenWithCharge, Designer.Instance.MaxMovementSpeedEvenWithCharge);
@@ -218,6 +218,11 @@ public class PlayerMovement : MonoBehaviour {
         if (1 << other.gameObject.layer == DeathLayer.value)
         {
             KillPlayer();
+        }
+
+        if (1 << other.gameObject.layer == FinishLineLayer.value)
+        {
+            GameController.Instance.Victory();
         }
     }
 

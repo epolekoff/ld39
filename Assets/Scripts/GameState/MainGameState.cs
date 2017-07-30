@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class MainGameState : AbsState {
 
+    public override void Enter(IStateMachineEntity entity)
+    {
+        UIController.Instance.GameCanvas.GameUI.SetActive(true);
+    }
+
     /// <summary>
     /// 
     /// </summary>

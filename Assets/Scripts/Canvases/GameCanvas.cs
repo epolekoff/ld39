@@ -3,16 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class GameCanvas : MonoBehaviour {
 
     public Text TimerText;
 
+    public GameObject TimerPanel;
+
     public Slider PowerMeter;
     public Text PowerMeterText;
 
-	// Use this for initialization
-	void Start () {
+    public GameObject GameUI;
+
+    public Button NextLevelButton;
+    public Button MainMenuButton;
+    public Button RetryButton;
+
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
@@ -49,5 +58,35 @@ public class GameCanvas : MonoBehaviour {
         var span = new TimeSpan(0, 0, 0, Mathf.FloorToInt(value), milliseconds);
         string timeFormat = string.Format("{0:00}:{1:00}:{2:000}", (int)span.TotalMinutes, span.Seconds, span.Milliseconds);
         return timeFormat;
+    }
+
+    public void GoToNextLevel()
+    {
+        GameController.Instance.GoToNextLevel();
+    }
+
+    public void ShowGameFinishedAnimation()
+    {
+        TimerPanel.GetComponent<Animator>().SetBool("GameFinished", true);
+    }
+
+    public void EnableNextLevelButton(bool isNextLevel)
+    {  
+        if(isNextLevel)
+        {
+            NextLevelButton.gameObject.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(NextLevelButton.gameObject);
+        }
+        else
+        {
+            MainMenuButton.gameObject.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(MainMenuButton.gameObject);
+        }
+    }
+
+    public void EnableRetryButton()
+    {
+        RetryButton.gameObject.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(RetryButton.gameObject);
     }
 }
