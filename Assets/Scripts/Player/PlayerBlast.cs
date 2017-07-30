@@ -16,9 +16,11 @@ public class PlayerBlast : MonoBehaviour
     public Image ReticleCover;
     public Gradient ReticleFillGradient;
 
+    public GameObject ForceConePrefab;
+
     private const float MinTimescale = 0.1f;
-    private const float TimescaleDecayRate = 0.5f;
-    private const float MaxSlowdownTime = 3f;
+    private const float TimescaleDecayRate = 0.4f;
+    private const float MaxSlowdownTime = 4f;
 
     private const float CameraLerpTime = 5f;
     private const float CameraResetTime = 0.5f;
@@ -113,7 +115,8 @@ public class PlayerBlast : MonoBehaviour
         if ((Input.GetAxis("Fire") == 0 && m_triggerDown) ||
             Input.GetButtonUp("FireButton"))
         {
-            m_triggerDown = Input.GetAxis("Fire") == 0;
+            if (Input.GetAxis("Fire") == 0 && m_triggerDown)
+                m_triggerDown = false;
 
             // Add the force
             Vector2 armDirection = new Vector2(m_aimX, -m_aimY);
@@ -125,6 +128,7 @@ public class PlayerBlast : MonoBehaviour
 
             // Animations
             GetComponent<Player>().CharacterSprite.GetComponent<Animator>().SetBool("Charging", false);
+            FireForceCone();
 
             // Allow movement again
             GetComponent<PlayerMovement>().MovementOverride = false;
@@ -199,5 +203,19 @@ public class PlayerBlast : MonoBehaviour
 
             yield return null;
         }
+    }
+
+    private void FireForceCone()
+    {
+        var forceConeObject = GameObject.Instantiate(ForceConePrefab) as GameObject;
+        var forceCone = forceConeObject.GetComponent<ForceCone>();
+
+        forceCone.transform.SetParent(this.transform);
+        forceCone.transform.localPosition = ArmObject.transform.localPosition;
+        forceCone.transform.localRotation = Quaternion.LookRotation(new Vector3(m_aimX, -m_aimY, 0), transform.right);
+        forceCone.EmitParticles();
+
+        // Destroy the cone when it's done.
+        GameObject.Destroy(forceConeObject, 3f);
     }
 }

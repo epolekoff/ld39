@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour {
     private bool m_wallSliding = false;
     private float m_clingTimer = 0;
     private float m_wallJumpMovementLockoutTimer = 0f;
-    private float m_racerHeight = 1f;
+    private float m_racerHeight = 0.8f;
     private float m_movementMultiplier = 1f;
 
     private const float FrameRecordingDelay = 0.1f;
