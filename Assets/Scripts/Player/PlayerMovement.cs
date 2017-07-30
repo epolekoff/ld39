@@ -38,7 +38,7 @@ public class PlayerMovement : MonoBehaviour {
     void Start () {
         m_player = GetComponent<Player>();
         m_rigidbody = GetComponent<Rigidbody2D>();
-        m_animator = GetComponent<Animator>();
+        m_animator = m_player.CharacterSprite.GetComponent<Animator>();
 
         UpdateValuesFromDesignerVariables();
     }
@@ -76,7 +76,7 @@ public class PlayerMovement : MonoBehaviour {
         m_rigidbody.velocity += new Vector2(0, m_maxJumpVelocity);
 
         //Activate jumping in Animator
-        m_animator.SetBool("isJumping", true);
+        m_animator.SetBool("Jump", true);
     }
 
     /// <summary>
@@ -118,7 +118,7 @@ public class PlayerMovement : MonoBehaviour {
             velocity.x = Mathf.Clamp(velocity.x, -Designer.Instance.MaxMovementSpeedEvenWithCharge, Designer.Instance.MaxMovementSpeedEvenWithCharge);
             
             //Activate run animation
-            m_animator.SetBool("isRunning", true);
+            m_animator.SetBool("Running", true);
         }
 
         //Flip sprite if running to the left
@@ -149,7 +149,7 @@ public class PlayerMovement : MonoBehaviour {
             //Stop run animation if at rest
             if (velocity.x == 0)
             {
-                m_animator.SetBool("isRunning", false);
+                m_animator.SetBool("Running", false);
             }
         }
 
@@ -181,7 +181,11 @@ public class PlayerMovement : MonoBehaviour {
         //Cancel jumping animation if on ground
         if (m_onGround)
         {
-            m_animator.SetBool("isJumping", false);
+            m_animator.SetBool("Jump", false);
+        }
+        else
+        {
+            m_animator.SetBool("Jump", true);
         }
 
         // Check platforms
