@@ -281,6 +281,6 @@ public class PlayerMovement : MonoBehaviour {
     /// </summary>
     private void KillPlayer()
     {
-        Debug.Log("PlayerMovement.KillPlayer()");
+        GameController.Instance.KillPlayer();
     }
 }

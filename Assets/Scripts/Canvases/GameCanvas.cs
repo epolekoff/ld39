@@ -65,6 +65,11 @@ public class GameCanvas : MonoBehaviour {
         GameController.Instance.GoToNextLevel();
     }
 
+    public void RetryLevel()
+    {
+        GameController.Instance.RetryLevel();
+    }
+
     public void ShowGameFinishedAnimation()
     {
         TimerPanel.GetComponent<Animator>().SetBool("GameFinished", true);

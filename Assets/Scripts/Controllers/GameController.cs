@@ -21,6 +21,7 @@ public class GameController : Singleton<GameController>, IStateMachineEntity {
     public float CurrentPowerLevel { get; set; }
 
     public bool GameStarted = false;
+    public bool GameFinished = false;
 
     public Player Player { get; set; }
 
@@ -76,7 +77,15 @@ public class GameController : Singleton<GameController>, IStateMachineEntity {
 
     public void Victory()
     {
+        GameFinished = true;
         m_stateMachine.ChangeState(new LevelVictoryState());
+    }
+
+    public void KillPlayer()
+    {
+        if (GameFinished)
+            return;
+        m_stateMachine.ChangeState(new LevelDeathState());
     }
 
     public void GoToNextLevel()
@@ -86,6 +95,11 @@ public class GameController : Singleton<GameController>, IStateMachineEntity {
             SceneManager.LoadScene(0);
         }
         SceneManager.LoadScene(CurrentLevel + 1);
+    }
+
+    public void RetryLevel()
+    {
+        SceneManager.LoadScene(CurrentLevel);
     }
 
     public bool IsNextLevel()

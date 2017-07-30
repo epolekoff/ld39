@@ -37,6 +37,8 @@ public class PlayerBlast : MonoBehaviour
     private float m_charge = 0f;
     private bool m_triggerDown = false;
     private bool m_charging = false;
+    private float m_cooldownTimer = 0f;
+    private const float MaxCooldownTimer = 1f;
 
     float m_aimX = 0, m_aimY = 0;
 
@@ -85,7 +87,7 @@ public class PlayerBlast : MonoBehaviour
     private void HandleShooting()
     {
         // Hold down the button to charge.
-        if (Input.GetAxis("Fire") > 0 || Input.GetButton("FireButton"))
+        if ((Input.GetAxis("Fire") > 0 || Input.GetButton("FireButton")) && m_cooldownTimer <= 0)
         {
             // If you just started charging, trigger some effects
             if (!m_charging)
@@ -120,11 +122,14 @@ public class PlayerBlast : MonoBehaviour
         }
 
         // Release to fire.
-        if ((Input.GetAxis("Fire") == 0 && m_triggerDown) ||
-            Input.GetButtonUp("FireButton"))
+        if (((Input.GetAxis("Fire") == 0 && m_triggerDown) ||
+            Input.GetButtonUp("FireButton")) 
+            && m_cooldownTimer <= 0)
         {
             if (Input.GetAxis("Fire") == 0 && m_triggerDown)
                 m_triggerDown = false;
+
+            m_cooldownTimer = MaxCooldownTimer;
 
             // Add the force
             Vector2 armDirection = new Vector2(m_aimX, -m_aimY);
@@ -144,6 +149,12 @@ public class PlayerBlast : MonoBehaviour
             // Reset the charge
             m_charge = 0;
             m_charging = false;
+        }
+
+        // Keep track of the cooldown.
+        if(m_cooldownTimer > 0)
+        {
+            m_cooldownTimer -= Time.deltaTime;
         }
     }
 

@@ -10,7 +10,11 @@ public class LevelVictoryState : AbsState
 
         // Unhinge the camera from the racer.
         GameController.Instance.Player.GetComponent<PlayerBlast>().StopAllCoroutines();
-        GameController.Instance.Player.GetComponentInChildren<Camera>().transform.SetParent(null);
+        var camera = GameController.Instance.Player.GetComponentInChildren<Camera>();
+        if (camera != null)
+        {
+            camera.transform.SetParent(null);
+        }
 
         // Show an animation for the high score.
         UIController.Instance.GameCanvas.ShowGameFinishedAnimation();
@@ -26,7 +30,18 @@ public class LevelDeathState : AbsState
     {
         base.Enter(entity);
 
-        // Enable the retyr button.
+        // Unhinge the camera from the racer.
+        GameController.Instance.Player.GetComponent<PlayerBlast>().StopAllCoroutines();
+        var camera = GameController.Instance.Player.GetComponentInChildren<Camera>();
+        if (camera != null)
+        {
+            camera.transform.SetParent(null);
+        }
+
+        // Show an animation for the high score.
+        //UIController.Instance.GameCanvas.ShowGameFinishedAnimation();
+
+        // Enable the retry button.
         UIController.Instance.GameCanvas.EnableRetryButton();
     }
 }
