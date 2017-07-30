@@ -118,7 +118,7 @@ public class PlayerBlast : MonoBehaviour
             }
 
             // Disable movement while charging
-            GetComponent<PlayerMovement>().MovementOverride = true;
+            //GetComponent<PlayerMovement>().MovementOverride = true;
         }
 
         // Release to fire.

@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour {
     public LayerMask FinishLineLayer;
     public Transform GroundDetectionObject;
 
+    public ParticleSystem GibParticles;
+
     private Player m_player;
     private Rigidbody2D m_rigidbody;
     private Animator m_animator;
@@ -232,7 +234,7 @@ public class PlayerMovement : MonoBehaviour {
     /// </summary>
     private void HandleJump()
     {
-        if(Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump"))
         {
             // On the ground, we jump
             if(m_onGround)
@@ -281,6 +283,12 @@ public class PlayerMovement : MonoBehaviour {
     /// </summary>
     private void KillPlayer()
     {
+        GibParticles.gameObject.SetActive(true);
+        GibParticles.Emit(10);
+        GetComponent<Player>().CharacterSprite.gameObject.SetActive(false);
         GameController.Instance.KillPlayer();
+
+        this.MovementOverride = true;
+        GetComponent<PlayerBlast>().MoveAllowed = false;
     }
 }
