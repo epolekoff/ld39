@@ -15,6 +15,7 @@ public class PlayerBlast : MonoBehaviour {
 
     private float m_charge = 0f;
     private bool m_triggerDown = false;
+    private bool m_charging = false;
 
     float m_aimX = 0, m_aimY = 0;
 
@@ -59,6 +60,13 @@ public class PlayerBlast : MonoBehaviour {
         // Hold down the button to charge.
         if(Input.GetAxis("Fire") > 0 || Input.GetButton("FireButton"))
         {
+            // If you just started charging, trigger some effects
+            if(!m_charging)
+            {
+                GetComponent<Player>().CharacterSprite.GetComponent<Animator>().SetBool("Charging", true);
+            }
+
+            m_charging = true;
             m_triggerDown = Input.GetAxis("Fire") > 0;
             if(m_charge == 0)
             {
@@ -78,6 +86,9 @@ public class PlayerBlast : MonoBehaviour {
             {
                 m_charge = Mathf.Max(GameController.Instance.CurrentPowerLevel / Designer.Instance.ChargePowerUsageRatio, Designer.Instance.MinCharge);
             }
+
+            // Disable movement while charging
+            GetComponent<PlayerMovement>().MovementOverride = true;
         }
 
         // Release to fire.
@@ -94,8 +105,15 @@ public class PlayerBlast : MonoBehaviour {
             // Remove the used charge from our meter.
             GameController.Instance.UseCharge(m_charge * Designer.Instance.ChargePowerUsageRatio);
 
+            // Animations
+            GetComponent<Player>().CharacterSprite.GetComponent<Animator>().SetBool("Charging", false);
+
+            // Allow movement again
+            GetComponent<PlayerMovement>().MovementOverride = false;
+
             // Reset the charge
             m_charge = 0;
+            m_charging = false;
         }
     }
 
