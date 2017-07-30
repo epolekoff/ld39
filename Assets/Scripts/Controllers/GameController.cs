@@ -41,6 +41,31 @@ public class GameController : Singleton<GameController>, IStateMachineEntity {
     void Update () {
         m_stateMachine.Update();
 
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene(0);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            SceneManager.LoadScene(1);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            SceneManager.LoadScene(2);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            SceneManager.LoadScene(3);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            SceneManager.LoadScene(4);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            SceneManager.LoadScene(5);
+        }
     }
 
     /// <summary>
